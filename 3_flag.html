@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        #results {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 80%;
+            text-align: left;
+        }
+        
+        p {
+            margin: 0;
+            padding: 5px 0;
+            border-bottom: 5px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task C: Country Details</h1>
+    <div id="results"></div>
+
+    <script>
+        fetch('https://restcountries.com/v3.1/all')
+          .then(response => response.json())
+          .then(data => {
+            const resultsDiv = document.getElementById('results');
+            
+            data.forEach(country => {
+                resultsDiv.innerHTML += "<p>Name: " + country.name.common + "</p>";
+                resultsDiv.innerHTML += "<p>Capital: " + country.capital + "</p>";
+                resultsDiv.innerHTML += "<img src='" + country.flags.png + "' alt='Flag'>";
+            });
+          })
+          .catch(error => console.error("Error fetching data:", error));
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        #results {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 80%;
+            text-align: left;
+        }
+        
+        p {
+            margin: 0;
+            padding: 5px 0;
+            border-bottom: 5px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task B: Countries with Population Less than 2 Lakhs</h1>
+    <div id="results"></div>
+
+    <script>
+        fetch('https://restcountries.com/v3.1/all')
+          .then(response => response.json())
+          .then(data => {
+            const lowPopulationCountries = data.filter(country => country.population < 200000);
+            const resultsDiv = document.getElementById('results');
+
+            lowPopulationCountries.forEach(country => {
+                resultsDiv.innerHTML += "<p>" + JSON.stringify(country, null, 2) + "</p>";
+            });
+          })
+          .catch(error => console.error("Error fetching data:", error));
+    </script>
+</body>
+</html>

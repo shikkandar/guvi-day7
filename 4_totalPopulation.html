@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        #results {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task D: Total Population of All Countries</h1>
+    <div id="results"></div>
+
+    <script>
+        fetch('https://restcountries.com/v3.1/all')
+          .then(response => response.json())
+          .then(data => {
+            const totalPopulation = data.reduce((acc, country) => acc + country.population, 0);
+            const resultsDiv = document.getElementById('results');
+            
+            resultsDiv.innerHTML = "Total population of all countries: " + totalPopulation;
+          })
+          .catch(error => console.error("Error fetching data:", error));
+    </script>
+</body>
+</html>

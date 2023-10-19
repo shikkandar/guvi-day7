@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        #results {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 80%;
+        }
+        
+        p {
+            margin: 0;
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task E: Countries Using US Dollars</h1>
+    <div id="results"></div>
+
+    <script>
+        fetch('https://restcountries.com/v3.1/all')
+          .then(response => response.json())
+          .then(data => {
+            const usDollarCountries = data.filter(country => country.currencies && country.currencies.USD);
+            const resultsDiv = document.getElementById('results');
+            
+            if (usDollarCountries.length > 0) {
+                resultsDiv.innerHTML = "Countries using US Dollars: ";
+                usDollarCountries.forEach(country => {
+                    resultsDiv.innerHTML += "<p>" + country.name.common + "</p>";
+                });
+            } else {
+                resultsDiv.innerHTML = "No countries use US Dollars as currency.";
+            }
+          })
+          .catch(error => console.error("Error fetching data:", error));
+    </script>
+</body>
+</html>
